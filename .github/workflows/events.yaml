@@ -1,6 +1,19 @@
 name: Repository Events
 on:
     push:
+        branches:
+            - main
+            - "feature/*" #matches any branch that starts with feature/featA, feature/fetaB.  Does not match feature/featA/featB
+            - "feature/**" #match feature/featA/featB
+            - "!feature/featA" # ignore feature/featA branch
+        # branches-ignore: 
+        #     - feature/featA
+        tags:
+            - v1.* #matches v1.1, v1.2, v1.3
+            - "!v1.1.1"
+        paths:
+            - "**.js" # when changes to js files
+            - "!app.js"
     pull_request:
         types: [opened,synchronize,reopened,assigned]
     issues:
