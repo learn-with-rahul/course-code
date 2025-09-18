@@ -8,6 +8,7 @@ jobs:
             - name: step-1
               run: sleep 20
             - name: step-2
+              id: step-2
               run: exit 1
             - name: runs on Failure
               if: failure() && steps.step-2.conclusion == 'failure'
@@ -30,4 +31,6 @@ jobs:
         if: failure()
         steps:
             - run: echo 'Job 2'
+
+
 
