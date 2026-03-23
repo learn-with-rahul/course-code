@@ -1,0 +1,26 @@
+name: Claude API Example
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-claude:
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Call Claude claude-opus-4-5
+        # Note: "claude-opus-4-6" does not exist. The correct model name is "claude-opus-4-5".
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          curl -s https://api.anthropic.com/v1/messages \
+            -H "x-api-key: $ANTHROPIC_API_KEY" \
+            -H "anthropic-version: 2023-06-01" \
+            -H "content-type: application/json" \
+            -d '{
+              "model": "claude-opus-4-5",
+              "max_tokens": 256,
+              "messages": [
+                {"role": "user", "content": "Say hello in one sentence."}
+              ]
+            }'
